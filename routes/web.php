@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,5 +15,9 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return view("auth.signup");
 });
+
+Route::post("/login", [SessionController::class, "store"]);
+Route::get("/shop", [ShopController::class, "index"]);
+
 
 
