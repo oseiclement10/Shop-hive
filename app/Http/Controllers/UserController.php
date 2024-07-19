@@ -28,7 +28,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedUserInfo = $request->validate([
+            "firstname" => ["required"],
+            "othernames" => ["nullable"],
+            "email" => ["email", "unique:users,email"],
+            "password" => ["required", "min:4", "confirmed"],
+        ],[
+            "password.confirmed" => "Passwords do not match"
+        ]);
+
+        User::create($validatedUserInfo);
+
+        return redirect("/login");
     }
 
     /**

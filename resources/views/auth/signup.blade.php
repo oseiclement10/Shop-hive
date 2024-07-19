@@ -12,10 +12,10 @@
                 </div>
 
                 <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="#" method="POST">
+                    <form class="space-y-6" action="/signup" method="POST">
                         @csrf
-                        <x-forms.field type="text" name="first_name" label="First Name" required />
-                        <x-forms.field type="text" name="other_name" label="Other Name" required />
+                        <x-forms.field type="text" name="firstname" label="First Name" required />
+                        <x-forms.field type="text" name="othernames" label="Other Name"  />
                         <x-forms.field type="email" name="email" label="Email" required />
                         <x-forms.field type="password" name="password" label="Password" required />
                         <x-forms.field type="password" name="password_confirmation" label="Confirm Password" required />
