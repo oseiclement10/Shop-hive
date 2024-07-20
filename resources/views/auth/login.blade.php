@@ -27,13 +27,12 @@
                 <div class="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
                     <form class="space-y-6" action="/login" method="POST">
                         @csrf
-                        <x-forms.field type="email" name="email" label="Email" />
-                        <x-forms.field type="password" name="password" label="Password" />
+                        <x-forms.field type="email" name="email" label="Email"  required />
+                        <x-forms.field type="password" name="password" label="Password" required />
                         <div class="text-sm text-center">
                             <a href="#" class="font-semibold text-emerald-600 hover:text-emerald-500">Forgot
                                 password?</a>
                         </div>
-
 
 
                         <div>

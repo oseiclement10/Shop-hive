@@ -39,7 +39,7 @@ class UserController extends Controller
 
         User::create($validatedUserInfo);
 
-        return redirect("/login");
+        return redirect("login");
     }
 
     /**

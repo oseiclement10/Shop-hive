@@ -20,6 +20,11 @@ class SessionController extends Controller
             ]);
         }
 
+        if (!Auth::user()->hasVerifiedEmail()) {
+            Auth::user()->sendEmailVerificationNotification();
+            return redirect()->route("verify.email");
+        }
+
         request()->session()->regenerate();
 
         return redirect("/shop");
