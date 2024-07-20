@@ -30,7 +30,8 @@ Route::get("/email/verification/{id}/{hash}", function (EmailVerificationRequest
 
 Route::post("/email/verification-notification", function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
-    return back()->with("message", "Verification link sent on your email!");
+    // return back()->with("message", "Verification link sent on your email!");
+    return back();
 })->middleware(["auth", "throttle:6,1"])->name("send.verification");
 
 

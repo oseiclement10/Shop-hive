@@ -11,9 +11,8 @@
                 <img src="{{ Vite::asset('resources/images/mail-sent.png') }}" alt="shop hive"
                     class="max-w-[100px] mb-4 mx-auto">
                 <h4 class="font-semibold text-lg text-slate-700 mb-1 text-center">Email Verification</h4>
-                <p class="text-center text-slate-700 mb-2"> Kindly check your mail @ cc***@**mail.com. Email
-                    Verification Link has been
-                    sent to your email address Click on the link sent to your email to verify your email address
+                <p class="text-center text-slate-700 mb-2">
+                    Email Verification Link has been sent to your email address Click on the link sent to your email to verify your email address
                 </p>
 
                 <p class="text-center text-slate-600">If you did not receive the email,
