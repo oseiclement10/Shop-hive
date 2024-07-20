@@ -26,8 +26,10 @@ class SendEmail implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle($mailType): void
     {
-        Mail::to($this->email)->send(new MyEmail());
+        if ($mailType == 'verifyEmail') {
+            Mail::to($this->email)->send(new MyEmail());
+        }
     }
 }
