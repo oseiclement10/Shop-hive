@@ -2,34 +2,43 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class SendEmail implements ShouldQueue
 {
-    use Queueable, Dispatchable;
+    use Queueable, Dispatchable, InteractsWithQueue, SerializesModels;
 
-    protected $email;
+    protected $user;
+    protected $details;
+
+
 
     /**
      * Create a new job instance.
      */
-    public function __construct($email)
+    public function __construct( User $user, $details)
     {
-        $this->email = $email;
+        $this->user = $user;
+        $this->details = $details;
     }
 
     /**
      * Execute the job.
      */
-    public function handle($mailType): void
+    public function handle(): void
     {
-        if ($mailType == 'verifyEmail') {
-            Mail::to($this->email)->send(new MyEmail());
+        if ($this->details["type"] == "verifyMail") {
+            Notification::send($this->user, new VerifyEmail);
         }
     }
 }
