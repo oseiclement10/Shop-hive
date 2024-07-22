@@ -2,8 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "front":"vite",
-        "backend":"php artisan serve",
+        "front": "vite",
+        "backend": "php artisan serve",
         "dev": "concurrently \"npm run front\" \"npm run backend\" ",
         "build": "vite build"
     },
@@ -15,5 +15,8 @@
         "postcss": "^8.4.39",
         "tailwindcss": "^3.4.6",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "@flaticon/flaticon-uicons": "^3.3.1"
     }
 }
