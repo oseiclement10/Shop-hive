@@ -20,7 +20,7 @@ class StockFactory extends Factory
         return [
             "product_id" => Product::factory(),
             "quantity" => fake()->numberBetween(10, 200),
-            "price" => fake()->randomFloat(2, 10, 1000),
+            "price" =>  fake()->randomFloat(2, 10, 1000),
         ];
     }
 }

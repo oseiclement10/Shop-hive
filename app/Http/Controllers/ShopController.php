@@ -13,7 +13,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $stocks = Stock::paginate(20);
+        $stocks = Stock::with(["product.categories"])->paginate(20);
         return view("shop.index", [
             "stocks" => $stocks
         ]);
