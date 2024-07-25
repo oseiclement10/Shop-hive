@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body class="relative">
     {{ $slot }}
 </body>
 

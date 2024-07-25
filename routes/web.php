@@ -30,7 +30,6 @@ Route::get("/email/verification/{id}/{hash}", function (EmailVerificationRequest
 
 Route::post("/email/verification-notification", function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
-    // return back()->with("message", "Verification link sent on your email!");
     return back();
 })->middleware(["auth", "throttle:6,1"])->name("send.verification");
 
@@ -38,7 +37,7 @@ Route::post("/email/verification-notification", function (Request $request) {
 Route::post("/login", [SessionController::class, "store"])->name('login');
 Route::post("/signup", [UserController::class, "store"]);
 
-Route::get("/shop", [ShopController::class, "index"]);
+Route::get("/shop", [ShopController::class, "index"])->middleware(["auth", "verified"]);
 
 
 

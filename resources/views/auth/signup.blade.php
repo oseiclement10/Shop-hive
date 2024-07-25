@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.index>
     <section class="grid grid-cols-5 h-dvh">
 
         <div class="col-span-3 flex flex-col items-center justify-center overflow-y-scroll ">

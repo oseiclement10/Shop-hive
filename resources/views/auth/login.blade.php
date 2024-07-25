@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.index>
     <section class="grid grid-cols-5 min-h-dvh">
         <div class="col-span-2 bg-emerald-500 flex items-center justify-center">
             <div class="flex flex-col items-center ">

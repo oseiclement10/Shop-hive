@@ -24,17 +24,11 @@ class SessionController extends Controller
 
         if (!Auth::user()->hasVerifiedEmail()) {
 
-            // $details = [
-            //     'name' => Auth::user()->name,
-            //     'message' => 'Please verify your email address by clicking on the link we have sent to your email.'
-            // ];
-
+          
             Auth::user()->sendEmailVerificationNotification();
 
 
 
-            // dispatch(new SendEmail(Auth::user()->email,"verifyEmail"));
-            // SendEmail::dispatch(Auth::user()->email, $details);
             return redirect()->route("verify.email");
         }
 

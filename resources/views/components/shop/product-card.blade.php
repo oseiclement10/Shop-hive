@@ -1,6 +1,6 @@
 @props(['product'])
 
-<div class="bg-slate-50 px-6 pb-10 pt-4 rounded-md">
+<div class="bg-slate-100 px-6 pb-10 pt-4 rounded-md">
     <p class="bg-red-500 text-white px-2 py-[2px] w-fit rounded-sm text-xs">Out of Stock</p>
     <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="test title"
         class="h-40 w-full object-contain" />
