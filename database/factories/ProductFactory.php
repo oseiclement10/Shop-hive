@@ -18,7 +18,7 @@ class ProductFactory extends Factory
     {
         return [
             "name" => fake()->word(),
-            "img" => fake()->imageUrl(),
+            "img" => "https://picsum.photos/id/".fake()->numberBetween(1,50)."/200/300",
             "short_description" => fake()->sentence(),
             "description" => fake()->paragraph(),
             "slug" => fake()->slug(),
