@@ -25,8 +25,7 @@
             </div>
         </div>
     </section> --}}
-    <div class="sm:py-10 lg:py-16" > </div>
-
+    
     <section class="flex">
         <div class=" flex flex-col  w-64 bg-white h-full border-r">
             <div class="overflow-y-auto overflow-x-hidden flex-grow">

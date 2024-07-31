@@ -1,7 +1,10 @@
-<header class="absolute  inset-x-0 top-0 z-50">
+@php
+    $styles = Route::is('home') ? 'absolute inset-x-0 top-0 z-50' : 'sticky top-0 bg-emerald-50/70 backdrop-blur-3xl ';
+@endphp
+<header class="{{ $styles }}">
     <nav class=" w-[90%] mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
-            <a href="#" class="-m-1.5 p-1.5">
+            <a href="/" class="-m-1.5 p-1.5">
                 <span class="sr-only">Your Company</span>
                 <img class="h-8 w-auto" src="{{ Vite::asset('resources/images/logo.png') }}" alt="">
             </a>
@@ -18,23 +21,57 @@
             </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Join Us</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">About Us</a>
+            <x-layouts.navlink path="/" name="home">
+                Home
+            </x-layouts.navlink>
+
+            <x-layouts.navlink path="/shop" name="shop">
+                Shop
+            </x-layouts.navlink>
+
+            <x-layouts.navlink path="/about" name="about">
+                About Us
+            </x-layouts.navlink>
+
+            <x-layouts.navlink path="/join-us" name="join-us">
+                Join Us
+            </x-layouts.navlink>
+
+            {{-- <a href="/" class="text-sm font-semibold leading-6 text-gray-900">Home</a> --}}
         </div>
         <div class="hidden space-x-4 lg:flex lg:flex-1 lg:justify-end">
-            <a href="/login" class="text-sm font-bold leading-6 text-gray-900">Log in <span
-                    aria-hidden="true"></span></a>
-            <a href="/signup"
-                class="text-[14px] font-semibold leading-6 pb-1 text-white text-center flex items-center justify-center px-2 py-[2px] bg-emerald-600 rounded-2xl">Sign
-                up
-                </span></a>
+            @guest
+                <a href="/login" class="text-sm font-bold leading-6 text-gray-900">Log in <span
+                        aria-hidden="true"></span></a>
+                <a href="/signup"
+                    class="text-[14px] font-semibold leading-6 pb-1 text-white text-center flex items-center justify-center px-2 py-[2px] bg-emerald-600 rounded-2xl">Sign
+                    up
+                    </span>
+                </a>
+            @endguest
+
+            @auth
+                <div class="w-fit  relative">
+                    <svg class="w-8 h-8 text-emerald-600 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                    </svg>
+                    <span
+                        class=" bg-amber-500 w-4 h-4 flex items-center justify-center text-xs shadow-md text-white absolute top-0 right-0 rounded-3xl">0</span>
+                </div>
+
+
+                <x-forms.form method="POST" name="logout" action="/logout" class="">
+                    <input type="submit" value="Logout"
+                        class="text-[14px] font-semibold leading-6 pb-1 text-emerald-600 text-center  px-2 py-[2px] border-2 border-emerald-600 rounded-2xl" />
+                </x-forms.form>
+            @endauth
 
         </div>
     </nav>
     <!-- Mobile menu, show/hide based on menu open state. -->
-    <div class="lg:hidden" role="dialog" aria-modal="true">
+    {{-- <div class="lg:hidden" role="dialog" aria-modal="true">
         <!-- Background backdrop, show/hide based on slide-over state. -->
         <div class="fixed inset-0 z-50"></div>
         <div
@@ -73,5 +110,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </header>
