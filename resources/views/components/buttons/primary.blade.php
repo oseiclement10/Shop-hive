@@ -1,7 +1,7 @@
 @props(['type' => 'normal'])
 
 @if ($type == 'normal')
-    <button class="text-white py-1 text-sm bg-amber-400 px-4 text-center cursor-pointer  rounded-md">
+    <button class="text-white py-[5px] border-2 border-transparent text-sm bg-amber-400 px-4 text-center cursor-pointer  rounded-md transition-primary hover:bg-emerald-500 hover:opacity-70 active:opacity-30">
         {{ $slot }}
     </button>
 @else
