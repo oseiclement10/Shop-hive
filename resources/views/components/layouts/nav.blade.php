@@ -1,5 +1,5 @@
 @php
-    $styles = Route::is('home') ? 'absolute inset-x-0 top-0 z-50' : 'sticky top-0 bg-emerald-50/70 backdrop-blur-3xl ';
+    $styles = Route::is('home') ? 'absolute inset-x-0 top-0 z-50' : 'sticky top-0 bg-emerald-100 backdrop-blur-3xl ';
 @endphp
 <header class="{{ $styles }}">
     <nav class=" w-[90%] mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
