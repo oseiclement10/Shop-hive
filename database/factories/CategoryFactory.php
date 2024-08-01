@@ -18,6 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             "name" => fake()->word(),
+            "img" => "https://picsum.photos/id/".fake()->numberBetween(50,100)."/250/200",
         ];
     }
 }

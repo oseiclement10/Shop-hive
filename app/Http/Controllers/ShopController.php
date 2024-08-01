@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Resource;
 use App\Models\Stock;
 use Illuminate\Http\Request;
@@ -14,8 +15,10 @@ class ShopController extends Controller
     public function index()
     {
         $stocks = Stock::with(["product.categories"])->paginate(20);
+        $categories = Category::all();
         return view("shop.index", [
-            "stocks" => $stocks
+            "stocks" => $stocks,
+            "categories" => $categories
         ]);
     }
 
