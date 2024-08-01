@@ -17,12 +17,37 @@
 
         {{-- CATEGORIES --}}
         <section class="bg-white w-[95%] mx-auto pb-6">
-            <h2 class="text-slate-700 font-semibold text-xl py-3 pl-6 border-b border-slate-200">
-                Explore various categories
-            </h2>
+            <div class="flex justify-between py-3 px-6 border-b border-slate-200">
+                <h2 class="text-slate-700 font-semibold text-xl ">
+                    Explore various categories
+                </h2>
+                <x-buttons.primary type="tertiary">View All</x-buttons.primary>
+            </div>
+
             <div class="grid grid-cols-6 gap-6">
                 @foreach ($categories as $category)
                     <x-shop.category-card :category="$category" />
+                @endforeach
+            </div>
+        </section>
+
+        {{-- TOP SELLING --}}
+        <section class="bg-white mx-auto pb-6 w-[95%]">
+            <div class="flex justify-between py-3 px-6 border-b border-slate-200">
+                <h2 class="text-slate-700 font-semibold text-xl ">
+                    Best Selling Products
+                </h2>
+                <div class="flex space-x-3">
+                    <button class="text-slate-600 text-sm font-semibold" >This month </button>
+                    <button class="text-slate-600 text-sm" >Last 3 months</button>
+                    <button class="text-slate-600 text-sm" >This year </button>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-6 gap-6 px-6 py-3">
+                @foreach ($topProducts as $stock)
+                    <x-shop.product-card :stock="$stock" />
                 @endforeach
             </div>
         </section>

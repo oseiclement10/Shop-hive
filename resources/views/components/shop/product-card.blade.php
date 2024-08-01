@@ -1,35 +1,51 @@
 @props(['stock'])
 
-<div class="bg-zinc-100/80 px-6 py-5 rounded-md">
+<div class="bg-slate-100/80 px-6 py-3 relative rounded-md">
+
     @if ($stock->quantity < 50)
-        <p class="bg-red-500 text-white px-2 py-[2px] w-fit  text-xs mb-1 rounded-md">Out of Stock</p>
+        <p class="bg-amber-500 absolute text-white px-2 py-[2px] w-fit right-4 top-3 text-xs mb-1 rounded-sm">Out of
+            Stock</p>
     @endif
 
+    <img src="{{ $stock->product->img }}" alt="{{ $stock->product->name }}" class="h-40  w-full object-contain" />
+    <h3 class=" capitalize w-5/6 text-base font-semibold text-slate-800"> {{ $stock->product->name }} </h3>
+    <p class="text-gray-600 text-xs mb-2">
+        {{ $stock->product->short_description }}
+    </p>
 
-    <img src="{{ $stock->product->img }}" alt="{{ $stock->product->name }}" class="h-40 w-full object-contain" />
-    <h3 class="mt-4 leading-tight w-5/6 text-lg font-semibold text-gray-900"> {{ $stock->product->name }} </h3>
+    <div class="flex items-center space-x-2">
+        <div class="flex ">
+            <svg class="w-3 h-3 text-amber-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+            </svg>
+            <svg class="w-3 h-3 text-amber-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+            </svg>
+            <svg class="w-3 h-3 text-amber-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+            </svg>
+            <svg class="w-3 h-3 text-amber-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+            </svg>
+            <svg class="w-3 h-3 text-amber-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z" />
+            </svg>
 
-    <div class="mb-4 flex items-center justify-between text-sm text-gray-700">
-        <span> {{ $stock->product->short_description }} </span>
-        <div class="flex items-center">
-            <svg class="w-6 h-6 text-amber-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24" fill="currentColor" viewBox="0 0 22 22">
-                <path
-                    d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
-            </svg>
-            <svg class="w-6 h-6 text-amber-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24" fill="currentColor" viewBox="0 0 22 22">
-                <path
-                    d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
-            </svg>
 
-            <svg class="w-6 h-6 text-amber-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24" fill="currentColor" viewBox="0 0 22 22">
-                <path
-                    d="m12.75 20.66 6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
-            </svg>
         </div>
+        <p class="text-xs text-gray-500">34 Reviews</p>
     </div>
 
-    <p class="mt-1 text-xl text-gray-900 font-bold"> GH₵ {{ $stock->price ?? 0 }}</p>
+    
+    <p class=" text-lg text-slate-800 font-semibold"> GH₵ {{ $stock->price ?? 0 }}</p>
 </div>

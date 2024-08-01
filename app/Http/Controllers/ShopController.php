@@ -15,10 +15,11 @@ class ShopController extends Controller
     public function index()
     {
         $stocks = Stock::with(["product.categories"])->paginate(20);
-        $categories = Category::all();
+        $categories = Category::limit(6)->get();
         return view("shop.index", [
             "stocks" => $stocks,
-            "categories" => $categories
+            "categories" => $categories,
+            "topProducts" => $stocks->take(6),
         ]);
     }
 
