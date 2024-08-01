@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductReview;
 use App\Models\Stock;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,6 +33,9 @@ class DatabaseSeeder extends Seeder
             ->each(function ($product) use ($categories) {
                 Stock::factory()->count(3)->create([
                     "product_id" => $product->id
+                ]);
+                ProductReview::factory()->count(3)->create([
+                    "product_id"=> $product->id,
                 ]);
                 $product->categories()->attach($categories->random(rand(1, 3))->pluck('id')->toArray());
             });

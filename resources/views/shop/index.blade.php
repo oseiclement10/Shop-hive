@@ -38,9 +38,9 @@
                     Best Selling Products
                 </h2>
                 <div class="flex space-x-3">
-                    <button class="text-slate-600 text-sm font-semibold" >This month </button>
-                    <button class="text-slate-600 text-sm" >Last 3 months</button>
-                    <button class="text-slate-600 text-sm" >This year </button>
+                    <button class="text-slate-600 text-sm font-semibold">This month </button>
+                    <button class="text-slate-600 text-sm">Last 3 months</button>
+                    <button class="text-slate-600 text-sm">This year </button>
                 </div>
 
             </div>
@@ -53,6 +53,8 @@
         </section>
 
     </section>
+
+    <x-layouts.footer />
 
 
 </x-layouts.index>
