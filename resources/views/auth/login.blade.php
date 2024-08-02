@@ -1,5 +1,5 @@
 <x-layouts.index>
-    <section class="grid grid-cols-5 min-h-dvh">
+    <section class="grid  min-h-dvh grid-cols-5">
         <div class="col-span-2 bg-emerald-500 flex items-center justify-center">
             <div class="flex flex-col items-center ">
                 <div
@@ -15,16 +15,16 @@
             </div>
         </div>
         <div class="col-span-3 flex flex-col items-center justify-center">
-            <div class="flex shadow-md border-t rounded-2xl flex-col justify-center px-6 py-12 lg:px-12">
+            <div class="flex rounded-2xl flex-col justify-center px-6 py-12 min-w-[500px] lg:px-12 ">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <img class="mx-auto h-10 w-auto" src="{{ Vite::asset('resources/images/logo.png') }}"
+                    <img class="mx-auto h-10 mb-4 w-auto" src="{{ Vite::asset('resources/images/logo.png') }}"
                         alt="Your Company">
                     <h2 class="text-center text-3xl mt-2 font-bold  text-slate-600">
-                        Sign in to your account
+                        Log in to your Account
                     </h2>
                 </div>
 
-                <div class="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
+                <div class="  sm:mx-auto sm:w-full sm:max-w-sm">
                     <form class="space-y-6" action="/login" method="POST">
                         @csrf
                         <x-forms.field type="email" name="email" label="Email"  required />
