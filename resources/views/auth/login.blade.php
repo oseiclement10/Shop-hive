@@ -11,7 +11,7 @@
 
             <div class="w-[400px]">
                 <h2 class="text-3xl text-center font-bold leading-tight text-black sm:text-4xl"> Login Here</h2>
-                <p class="mt-2 text-base text-center text-gray-600">Don&apos;t have an account? <a href="#"
+                <p class="mt-2 text-base text-center text-gray-600">Don&apos;t have an account? <a href="/signup"
                         title=""
                         class="font-medium text-emerald-600 transition-all duration-200 hover:text-emerald-700 hover:underline focus:text-emerald-700">Sign
                         up</a></p>

@@ -2,7 +2,7 @@
     <section class="grid grid-cols-5 h-dvh">
 
         <div class="col-span-3 flex flex-col items-center justify-center overflow-y-scroll ">
-            <div class="flex  rounded-2xl flex-col justify-center px-6 py-12 w-[500px] lg:px-12">
+            <div class="flex  w-5/6  rounded-2xl flex-col justify-center px-6 py-12  lg:px-12">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img class="mx-auto h-10 w-auto" src="{{ Vite::asset('resources/images/logo.png') }}"
                         alt="Your Company">
@@ -11,29 +11,24 @@
                     </h2>
                 </div>
 
-                <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="/signup" method="POST">
+                <div class="mt-4">
+                    <form class=" space-y-4 w-full" action="/signup" method="POST">
                         @csrf
-                        <x-forms.field type="text" name="firstname" label="First Name" required />
-                        <x-forms.field type="text" name="othernames" label="Other Name"  />
-                        <x-forms.field type="email" name="email" label="Email" required />
-                        <x-forms.field type="password" name="password" label="Password" required />
-                        <x-forms.field type="password" name="password_confirmation" label="Confirm Password" required />
+                        <div class="grid gap-4 grid-cols-2">
+                            <x-forms.field placeholder="first name here" type="text" name="firstname" label="First Name" required />
+                            <x-forms.field placeholder="other names here" type="text" name="othernames" label="Other Name" />
 
+                        </div>
+                        <x-forms.field type="email" placeholder="email here, email will be verified" name="email" label="Email" required />
+                        <x-forms.field type="password" placeholder="password here use a strong password" name="password" label="Password" required />
+                        <x-forms.field type="password" placeholder="confirm password" name="password_confirmation" label="Confirm Password" required />
                         <div>
-                            
+
                             <button type="submit"
-                                class="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">Sign
+                                class="flex w-full mt-6 justify-center rounded-md bg-emerald-600 px-3 py-4 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">Sign
                                 up</button>
                         </div>
                     </form>
-
-                    <p class="mt-10 text-center text-sm text-gray-500">
-                        Not a member?
-                        <a href="#" class="font-semibold leading-6 text-emerald-600 hover:text-emerald-500">
-                            Start a 14 day free trial
-                        </a>
-                    </p>
                 </div>
             </div>
         </div>
@@ -54,4 +49,4 @@
         </div>
     </section>
 
-</x-layout>
+    </x-layout>

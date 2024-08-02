@@ -1,6 +1,6 @@
 @props(['name', 'placeholder' => '', 'label', 'type' => 'text', 'required' => false])
 <div>
-    <label for="{{ $name }}" class="text-base font-medium text-gray-900">
+    <label for="{{ $name }}" class="text-base font-medium text-gray-800">
         {{ $label }}
     </label>
 
