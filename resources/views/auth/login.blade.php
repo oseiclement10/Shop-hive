@@ -1,58 +1,62 @@
 <x-layouts.index>
-    <section class="grid  min-h-dvh grid-cols-5">
-        <div class="col-span-2 bg-emerald-500 flex items-center justify-center">
-            <div class="flex flex-col items-center ">
-                <div
-                    class="w-10 h-10 bg-white shadow-md rounded-lg text-xl text-emerald-600 font-semibold flex items-center justify-center">
-                    Sh
-                </div>
-                <h2 class="text-5xl mb-4 font-semibold tracking-wide text-white"> Welcome Back!</h2>
-                <p class="text-slate-50 text-center">To keep connected, log in with your credentials</p>
-                <p class="text-slate-50 text-center mb-8">don't have an account ?</p>
-                <a href="/signup"
-                    class="text-sm py-[10px] px-12 border-2 rounded-3xl  text-white hover:bg-slate-100 hover:text-emerald-600 active:opacity-20 font-semibold">SIGN
-                    UP</a>
+    <section class="bg-slate-100  min-h-dvh flex justify-center items-center">
+
+
+        <div class="grid relative grid-cols-2 place-items-center bg-white w-5/6 my-10 rounded-xl shadow-sm ">
+            <div
+                class="absolute -top-8 shadow-sm flex items-center justify-center  left-[50%] w-24 h-24 rounded-full bg-slate-100 p-4">
+                <img src="{{ Vite::asset('resources/images/logo.png') }}" alt="logo" class="w-8 h-8 mt-3" />
             </div>
-        </div>
-        <div class="col-span-3 flex flex-col items-center justify-center">
-            <div class="flex rounded-2xl flex-col justify-center px-6 py-12 min-w-[500px] lg:px-12 ">
-                <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <img class="mx-auto h-10 mb-4 w-auto" src="{{ Vite::asset('resources/images/logo.png') }}"
-                        alt="Your Company">
-                    <h2 class="text-center text-3xl mt-2 font-bold  text-slate-600">
-                        Log in to your Account
-                    </h2>
-                </div>
 
-                <div class="  sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-6" action="/login" method="POST">
-                        @csrf
-                        <x-forms.field type="email" name="email" label="Email"  required />
-                        <x-forms.field type="password" name="password" label="Password" required />
-                        <div class="text-sm text-center">
-                            <a href="#" class="font-semibold text-emerald-600 hover:text-emerald-500">Forgot
-                                password?</a>
+
+            <div class="w-[400px]">
+                <h2 class="text-3xl text-center font-bold leading-tight text-black sm:text-4xl"> Login Here</h2>
+                <p class="mt-2 text-base text-center text-gray-600">Don&apos;t have an account? <a href="#"
+                        title=""
+                        class="font-medium text-emerald-600 transition-all duration-200 hover:text-emerald-700 hover:underline focus:text-emerald-700">Sign
+                        up</a></p>
+
+                <form action="/login" method="POST" class="mt-8">
+                    @csrf
+                    <div class="space-y-5">
+
+                        <x-forms.field placeholder="Enter account email" type="email" name="email" label="Email"
+                            required />
+
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <label for="" class="text-base font-medium text-gray-900"> Password </label>
+
+                                <a href="#" title=""
+                                    class="text-sm font-medium text-emerald-600 hover:underline hover:text-emerald-700 focus:text-emerald-700">
+                                    Forgot password? </a>
+                            </div>
+                            <div class="mt-2.5">
+                                <input type="password" name="password" id="" placeholder="Enter your password"
+                                    class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-emerald-600 focus:bg-white caret-emerald-600" />
+                                @error('password')
+                                    <p class="text-xs  text-red-500 mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
-
 
                         <div>
                             <button type="submit"
-                                class="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">Sign
+                                class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-emerald-600 border border-transparent rounded-md focus:outline-none hover:bg-emerald-700 focus:bg-emerald-700">Log
                                 in</button>
                         </div>
-                    </form>
+                    </div>
+                </form>
 
-                    <p class="mt-10 text-center text-sm text-gray-500">
-                        Not a member?
-                        <a href="/signup" class="font-semibold leading-6 text-emerald-600 hover:text-emerald-500">Start
-                            a
-                            14 day
-                            free
-                            trial</a>
-                    </p>
+
+            </div>
+
+            <div class="flex items-center justify-center px-4 py-10 sm:py-16 lg:py-24  sm:px-6 lg:px-8">
+                <div>
+                    <img class=" max-w-[500px] mx-auto" src="{{ Vite::asset('resources/images/login.png') }}"
+                        alt="login image" />
                 </div>
             </div>
         </div>
     </section>
-
-</x-layout>
+</x-layouts.index>
