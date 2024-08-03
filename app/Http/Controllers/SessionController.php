@@ -40,16 +40,20 @@ class SessionController extends Controller
             "password" => ["required", "min:4"]
         ]);
 
-        logger($validatedAttributes);
-
-        if (Auth::guard('vendor')->attempt($validatedAttributes)) {
-            request()->session()->regenerate();
-            return redirect()->intended(route('vendor.dashboard'));
+        if (!Auth::guard('vendor')->attempt($validatedAttributes)) {
+            throw ValidationException::withMessages([
+                "email" => ["The provided credentials are incorrect."]
+            ]);
         }
 
-        throw ValidationException::withMessages([
-            "email" => ["The provided credentials are incorrect."]
-        ]);
+        if (!Auth::guard('vendor')->user()->hasVerifiedEmail()) {
+            Auth::guard('vendor')->user()->sendEmailVerificationNotification();
+            return redirect()->route("vendor.verify.email");
+        }
+
+        request()->session()->regenerate();
+        return redirect()->intended(route('vendor.dashboard'));
+
     }
 
 

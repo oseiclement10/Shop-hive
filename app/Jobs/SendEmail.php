@@ -3,6 +3,8 @@
 namespace App\Jobs;
 
 use App\Models\User;
+use App\Models\Vendor;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -26,7 +28,7 @@ class SendEmail implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct( User $user, $details)
+    public function __construct($user, $details)
     {
         $this->user = $user;
         $this->details = $details;
@@ -37,8 +39,15 @@ class SendEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        if ($this->details["type"] == "verifyMail") {
-            Notification::send($this->user, new VerifyEmail);
-        }
+
+        // if ($this->details["type"] == "verifyMail") {
+        //     Notification::send($this->user, new VerifyEmail);
+        // }
+
+        // if ($this->details["type"] == "verifyVendorMail") {
+        //     Notification::send($this->user, new VerifyEmail);
+        // }
+
+        Notification::send($this->user, new VerifyEmail);
     }
 }
