@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="  sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form class="space-y-6" action="/login" method="POST">
+                        <form class="space-y-6" action="/vendor/login" method="POST">
                             @csrf
                             <x-forms.field type="email" placeholder="enter vendor email" name="email" label="Email"
                                 required />

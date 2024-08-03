@@ -12,7 +12,7 @@ Route::view("/", "landing.index")->name("home");
 Route::view("/about", "landing.about")->name("about");
 Route::view("/join-us", "landing.joinus")->name("join-us");
 
-//USER AUTHS
+// USER AUTHS
 Route::view("/login", "user.auth.login")->name("login");
 Route::view("/signup", "user.auth.signup")->name("signup");
 Route::view("/email/verify", "user.auth.verify-email")->name("verify.email");
@@ -27,11 +27,28 @@ Route::post("/email/verification-notification", function (Request $request) {
 })->middleware(["auth", "throttle:6,1"])->name("send.verification");
 
 Route::post("/signup", [UserController::class, "store"]);
-Route::post("/login", [SessionController::class, "userLogin"])->name('login');
+Route::post("/login", [SessionController::class, "userLogin"]);
 Route::post("/logout", [SessionController::class, "userLogout"])->middleware(["auth"])->name("logout");
 
-//VENDOR AUTHS
-Route::view("/vendor-login", "vendor.auth.login")->name("vendor.login");
+//  SHOP
+Route::get("/shop", [ShopController::class, "index"])->middleware(["auth", "verified"])->name("shop");
+
+
+
+
+//VENDOR 
+
+Route::prefix("vendor")->name("vendor.")->group(function () {
+    Route::view("login", "vendor.auth.login")->name("login");
+    Route::post("login", [SessionController::class, "vendorLogin"])->name("login");
+    Route::post("logout", [SessionController::class, "vendorLogout"])->name("logout");
+
+    Route::middleware("auth:vendor")->group(function () {
+        Route::view("dashboard", "vendor.dashboard")->name("dashboard");
+    });
+});
+
+
 
 
 
@@ -78,8 +95,7 @@ Route::view("/vendor-login", "vendor.auth.login")->name("vendor.login");
 
 
 
-//SHOP
-Route::get("/shop", [ShopController::class, "index"])->middleware(["auth", "verified"])->name("shop");
+
 
 
 

@@ -40,17 +40,16 @@ class SessionController extends Controller
             "password" => ["required", "min:4"]
         ]);
 
-        if (!Auth::attempt($validatedAttributes)) {
-            throw ValidationException::withMessages([
-                "password" => ["The provided credentials are incorrect."]
-            ]);
+        logger($validatedAttributes);
+
+        if (Auth::guard('vendor')->attempt($validatedAttributes)) {
+            request()->session()->regenerate();
+            return redirect()->intended(route('vendor.dashboard'));
         }
 
-      
-        request()->session()->regenerate();
-
-        return redirect()->route("shop");
-
+        throw ValidationException::withMessages([
+            "email" => ["The provided credentials are incorrect."]
+        ]);
     }
 
 
@@ -59,14 +58,14 @@ class SessionController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect("/login");
+        return redirect()->route("login");
     }
 
     public function vendorLogout()
     {
-        Auth::logout();
+        Auth::guard('vendor')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect("/login");
+        return redirect()->route('vendor.login');
     }
 }

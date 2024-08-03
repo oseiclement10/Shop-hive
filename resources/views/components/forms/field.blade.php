@@ -10,7 +10,7 @@
             class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-emerald-600 focus:bg-white caret-emerald-600"
             {{ $required ? 'required' : '' }} />
         @error($name)
-            <p class="text-xs  text-red-500 mt-1">{{ $message }}</p>
+            <p class="text-sm  text-red-500 mt-1">{{ $message }}</p>
         @enderror
     </div>
 </div>
