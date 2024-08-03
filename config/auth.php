@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'vendor' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ]
     ],
 
     /*
@@ -65,6 +69,11 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => env('VENDOR_MODEL', App\Models\Vendor::class),
+        ]
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -74,7 +83,8 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
-    |--------------------------------------------------------------------------
+    |---------
+    -----------------------------------------------------------------
     |
     | These configuration options specify the behavior of Laravel's password
     | reset functionality, including the table utilized for token storage

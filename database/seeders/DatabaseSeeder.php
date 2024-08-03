@@ -8,6 +8,7 @@ use App\Models\ProductReview;
 use App\Models\Stock;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Vendor;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +22,12 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'firstname' => 'Test',
             'othernames' => 'User',
-            'email' => 'admin@shophive.com',
+            'email' => 'user@shophive.com',
+        ]);
+
+        Vendor::factory()->create([
+            'name' => 'Shophive Limited',
+            'email' => 'vendor@shophive.com',            
         ]);
 
       

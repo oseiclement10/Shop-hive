@@ -9,11 +9,11 @@ use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
-    public function store()
+    public function userLogin()
     {
         $validatedAttributes = request()->validate([
             "email" => ["required", "email"],
-            "password" => ["required"]
+            "password" => ["required", "min:4"]
         ]);
 
         if (!Auth::attempt($validatedAttributes)) {
@@ -23,18 +23,50 @@ class SessionController extends Controller
         }
 
         if (!Auth::user()->hasVerifiedEmail()) {
-
-          
             Auth::user()->sendEmailVerificationNotification();
-
-
-
             return redirect()->route("verify.email");
         }
 
         request()->session()->regenerate();
 
-        return redirect("/shop");
+        return redirect()->route("shop");
 
+    }
+
+    public function vendorLogin()
+    {
+        $validatedAttributes = request()->validate([
+            "email" => ["required", "email"],
+            "password" => ["required", "min:4"]
+        ]);
+
+        if (!Auth::attempt($validatedAttributes)) {
+            throw ValidationException::withMessages([
+                "password" => ["The provided credentials are incorrect."]
+            ]);
+        }
+
+      
+        request()->session()->regenerate();
+
+        return redirect()->route("shop");
+
+    }
+
+
+    public function userLogout()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect("/login");
+    }
+
+    public function vendorLogout()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect("/login");
     }
 }

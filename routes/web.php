@@ -7,40 +7,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
-//NON - AUTH
-Route::get('/', function () {
-    return view('index');
-})->name("home");
+// LANDING
+Route::view("/", "landing.index")->name("home");
+Route::view("/about", "landing.about")->name("about");
+Route::view("/join-us", "landing.joinus")->name("join-us");
 
-Route::get('/login', function () {
-    return view("auth.login");
-});
-
-Route::get("/admin-login", function () {
-    return view("auth.adminlogin");
-}); 
-
-Route::get("/about", function () {
-    return view("about");
-})->name("about");
-
-Route::get("/join-us", function () {
-    return view("joinus");
-})->name("join-us");
-
-Route::post("/logout", function (Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect("/login");
-})->middleware(["auth"])->name("logout");
-
-Route::get('/signup', function () {
-    return view("auth.signup");
-});
-Route::get("/email/verify", function () {
-    return view("auth.verify-email");
-})->name("verify.email");
+//USER AUTHS
+Route::view("/login", "user.auth.login")->name("login");
+Route::view("/signup", "user.auth.signup")->name("signup");
+Route::view("/email/verify", "user.auth.verify-email")->name("verify.email");
 Route::get("/email/verification/{id}/{hash}", function (EmailVerificationRequest $request) {
     $request->fulfill();
     return redirect("/shop");
@@ -51,8 +26,56 @@ Route::post("/email/verification-notification", function (Request $request) {
     return back();
 })->middleware(["auth", "throttle:6,1"])->name("send.verification");
 
-Route::post("/login", [SessionController::class, "store"])->name('login');
 Route::post("/signup", [UserController::class, "store"]);
+Route::post("/login", [SessionController::class, "userLogin"])->name('login');
+Route::post("/logout", [SessionController::class, "userLogout"])->middleware(["auth"])->name("logout");
+
+//VENDOR AUTHS
+Route::view("/vendor-login", "vendor.auth.login")->name("vendor.login");
+
+
+
+// Route::get('/', function () {
+//     return view('index');
+// })->name("home");
+
+// Route::get('/login', function () {
+//     return view("auth.login");
+// });
+
+// Route::get("/admin-login", function () {
+//     return view("auth.adminlogin");
+// }); 
+
+// Route::get("/about", function () {
+//     return view("about");
+// })->name("about");
+
+// Route::get("/join-us", function () {
+//     return view("joinus");
+// })->name("join-us");
+
+// Route::post("/logout", function (Request $request) {
+//     Auth::logout();
+//     $request->session()->invalidate();
+//     $request->session()->regenerateToken();
+//     return redirect("/login");
+// })->middleware(["auth"])->name("logout");
+
+// Route::get('/signup', function () {
+//     return view("auth.signup");
+// });
+
+// Route::get("/email/verify", function () {
+//     return view("auth.verify-email");
+// })->name("verify.email");
+
+// Route::get("/email/verification/{id}/{hash}", function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+//     return redirect("/shop");
+// })->middleware(["signed"])->name("verification.verify");
+
+
 
 
 //SHOP

@@ -1,5 +1,7 @@
 @php
-    $styles = Route::is('home') ? 'absolute inset-x-0 top-0 z-50' : 'sticky top-0 bg-emerald-100 z-50 backdrop-blur-3xl ';
+    $styles = Route::is('home')
+        ? 'absolute inset-x-0 top-0 z-50'
+        : 'sticky top-0 bg-emerald-100 z-50 backdrop-blur-3xl ';
 @endphp
 <header class="{{ $styles }}">
     <nav class=" w-[90%] mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -64,7 +66,7 @@
 
                 <x-forms.form method="POST" name="logout" action="/logout" class="">
                     <input type="submit" value="Logout"
-                        class="text-[14px] font-semibold leading-6 pb-1 text-emerald-600 text-center  px-2 py-[2px] border-2 border-emerald-600 rounded-2xl" />
+                        class="text-[14px] cursor-pointer font-semibold leading-6 pb-1 text-emerald-600 text-center  px-2 py-[2px] border-2 border-emerald-600 rounded-2xl hover:bg-emerald-50 active:opacity-30" />
                 </x-forms.form>
             @endauth
 

@@ -16,7 +16,7 @@ class ShopController extends Controller
     {
         $stocks = Stock::with(["product.categories","product.reviews"])->paginate(20);
         $categories = Category::limit(6)->get();
-        return view("shop.index", [
+        return view("user.shop.index", [
             "stocks" => $stocks,
             "categories" => $categories,
             "topProducts" => $stocks->take(6),
