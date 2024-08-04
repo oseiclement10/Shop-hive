@@ -1,3 +1,3 @@
-<x-layouts.index>
-
-</x-layouts.index>
+    <x-layouts.vendor>
+        Dashboard
+    </x-layouts.vendor>
