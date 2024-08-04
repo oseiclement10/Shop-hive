@@ -54,7 +54,7 @@ Route::prefix("vendor")->name("vendor.")->group(function () {
 
     Route::post("login", [SessionController::class, "vendorLogin"])->name("login");
 
-    Route::middleware("auth:vendor")->group(function () {
+    Route::middleware("vendor-auth")->group(function () {
         Route::view("dashboard", "vendor.dashboard")->name("dashboard");
         Route::post("logout", [SessionController::class, "vendorLogout"])->name("logout");
     });
