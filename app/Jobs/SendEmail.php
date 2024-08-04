@@ -2,8 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\User;
-use App\Models\Vendor;
+use App\Notifications\UserEmailVerification;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,6 +14,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Log;
 
 class SendEmail implements ShouldQueue
 {
@@ -40,14 +40,13 @@ class SendEmail implements ShouldQueue
     public function handle(): void
     {
 
-        // if ($this->details["type"] == "verifyMail") {
-        //     Notification::send($this->user, new VerifyEmail);
-        // }
+        if ($this->details["type"] == "verifyUserMail") {
+            Notification::send($this->user, new UserEmailVerification("user"));
+        }
 
-        // if ($this->details["type"] == "verifyVendorMail") {
-        //     Notification::send($this->user, new VerifyEmail);
-        // }
+        if ($this->details["type"] == "verifyVendorMail") {
+            Notification::send($this->user, new UserEmailVerification("vendor"));
+        }
 
-        Notification::send($this->user, new VerifyEmail);
     }
 }

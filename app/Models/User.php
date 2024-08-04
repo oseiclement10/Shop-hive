@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -51,6 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function sendEmailVerificationNotification()
     {
-        SendEmail::dispatch($this, ["type" => "verifyMail"]);
+        Log::info('User sendEmailVerificationNotification called', ['email' => $this->email]);
+        SendEmail::dispatch($this, ["type" => "verifyUserMail"]);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ShopController;
+use App\Http\Requests\VendorEmailVerificationRequest;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -41,7 +42,7 @@ Route::get("/shop", [ShopController::class, "index"])->middleware(["auth", "veri
 Route::prefix("vendor")->name("vendor.")->group(function () {
     Route::view("login", "vendor.auth.login")->name("login");
     Route::view("email/verify", "vendor.auth.verify-email")->name("verify.email");
-    Route::get("email/verification/{id}/{hash}", function (EmailVerificationRequest $request) {
+    Route::get("email/verification/{id}/{hash}", function (VendorEmailVerificationRequest $request) {
         $request->fulfill();
         return redirect()->route("vendor.dashboard");
     })->middleware(["signed"])->name("verification.verify");
@@ -52,7 +53,6 @@ Route::prefix("vendor")->name("vendor.")->group(function () {
     })->middleware(["auth", "throttle:6,1"])->name("send.verification");
 
     Route::post("login", [SessionController::class, "vendorLogin"])->name("login");
-    Route::post("logout", [SessionController::class, "vendorLogout"])->name("logout");
 
     Route::middleware("auth:vendor")->group(function () {
         Route::view("dashboard", "vendor.dashboard")->name("dashboard");
