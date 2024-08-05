@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ShopController;
 use App\Http\Requests\VendorEmailVerificationRequest;
@@ -56,7 +57,8 @@ Route::prefix("vendor")->name("vendor.")->group(function () {
 
     Route::middleware("vendor-auth")->group(function () {
         Route::view("dashboard", "vendor.dashboard")->name("dashboard");
-        Route::view("products", "vendor.products")->name("products");
+        Route::resource("products", ProductController::class)->names(["index"=>"products"]);
+        // Route::view("products", "vendor.products")->name("products");
         Route::view("orders", "vendor.orders")->name("orders");
         Route::view("customers", "vendor.customers")->name("customers");
         Route::view("reports", "vendor.reports")->name("reports");

@@ -14,6 +14,11 @@ class Product extends Model
         return $this->hasMany(Stock::class);
     }
 
+    public function totalQuantity(){
+        return $this->stocks()->sum("quantity");
+    }
+
+    
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_category');

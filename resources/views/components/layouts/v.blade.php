@@ -4,7 +4,7 @@
             <x-layouts.v-sidebar />
         </aside>
         <section class="col-span-5 h-full ">
-            <div class="py-3 pr-2 flex justify-between items-center mb-2">
+            <div class="py-3 pr-8 flex justify-between items-center mb-2">
                 <input type="search" placeholder="search anything ..." class="py-2 bg-white rounded-xl px-6    min-w-[350px]" />
 
                 <div class="flex items-center space-x-3">
