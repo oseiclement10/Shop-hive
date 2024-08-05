@@ -1,4 +1,8 @@
-<aside class=" py-10 space-y-5  h-full bg-white rounded-xl">
+<aside class=" pb-10 pt-4 space-y-3  h-full bg-white rounded-lg">
+    <div class="flex items-center px-6  space-x-2 mt-1 mb-7">
+       <img src="{{Vite::asset("/resources/images/logo.png")}}" alt="logo" class="max-w-7"> <h3 class="font-semibold text-emerald-800 text-base">Shop Hive</h3>
+    </div>
+
     <x-layouts.v-menuitem href="vendor.dashboard" label="Dashboard">
         <svg class="w-6 h-6  " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             fill="none" viewBox="0 0 24 24">

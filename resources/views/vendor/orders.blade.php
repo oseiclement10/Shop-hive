@@ -1,3 +1,3 @@
-<x-layouts.vendor>
+<x-layouts.v>
     Orders
-</x-layouts.vendor>
+</x-layouts.v>

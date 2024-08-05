@@ -1,3 +1,3 @@
-<x-layouts.vendor>
+<x-layouts.v>
     Customers
-</x-layouts.vendor>
+</x-layouts.v>

@@ -1,3 +1,3 @@
-<x-layouts.vendor>
+<x-layouts.v>
     Reports
-</x-layouts.vendor>
+</x-layouts.v>
