@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class ProductController extends Controller
 {
     /**
@@ -12,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->get();
+        $products = Auth::guard("vendor")->user()->products()->latest()->get(); 
         return view("vendor.products", ["products" => $products]);
     }
 
