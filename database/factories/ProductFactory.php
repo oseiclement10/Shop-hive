@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,10 +19,11 @@ class ProductFactory extends Factory
     {
         return [
             "name" => fake()->words(3, true),
-            "img" => "https://picsum.photos/id/".fake()->numberBetween(1,50)."/400/250",
+            "img" => "https://picsum.photos/id/" . fake()->numberBetween(1, 50) . "/400/250",
             "short_description" => fake()->sentence(),
             "description" => fake()->paragraph(),
             "slug" => fake()->slug(),
+            "vendor_id" => Vendor::factory(),
         ];
     }
 }

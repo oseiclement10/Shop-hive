@@ -9,6 +9,7 @@ use App\Models\Stock;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Vendor;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,30 +19,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      
+
         User::factory()->create([
             'firstname' => 'Test',
             'othernames' => 'User',
             'email' => 'user@shophive.com',
         ]);
 
-        Vendor::factory()->create([
+        $mainVendor = Vendor::factory()->create([
             'name' => 'Shophive Limited',
-            'email' => 'vendor@shophive.com',            
+            'email' => 'vendor@shophive.com',
         ]);
 
-      
-        // seed products, categories and stocks
+
 
         $categories = Category::factory()->count(10)->create();
 
-        Product::factory()->count(10)->create()
+        Product::factory()->count(10)->state(
+            new Sequence(
+                ["vendor_id" => $mainVendor->id,],
+                ["vendor_id" => Vendor::factory()->create()->id]
+            )
+        )->create()
             ->each(function ($product) use ($categories) {
+
                 Stock::factory()->count(3)->create([
                     "product_id" => $product->id
                 ]);
                 ProductReview::factory()->count(3)->create([
-                    "product_id"=> $product->id,
+                    "product_id" => $product->id,
                 ]);
                 $product->categories()->attach($categories->random(rand(1, 3))->pluck('id')->toArray());
             });
