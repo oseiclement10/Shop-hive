@@ -9,16 +9,22 @@ class Product extends Model
 {
     use HasFactory;
 
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
     public function stocks()
     {
         return $this->hasMany(Stock::class);
     }
 
-    public function totalQuantity(){
+    public function totalQuantity()
+    {
         return $this->stocks()->sum("quantity");
     }
 
-    
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_category');
