@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\OrderItems;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Stock;
 use App\Models\User;
+use App\Models\Order;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Vendor;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -20,15 +22,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        User::factory()->create([
+        $mainUser = User::factory()->create([
             'firstname' => 'Test',
             'othernames' => 'User',
             'email' => 'user@shophive.com',
+            "email_verified_at" => now(),
         ]);
 
         $mainVendor = Vendor::factory()->create([
             'name' => 'Shophive Limited',
             'email' => 'vendor@shophive.com',
+            "email_verified_at" => now(),
         ]);
 
 
@@ -41,7 +45,21 @@ class DatabaseSeeder extends Seeder
                 ["vendor_id" => Vendor::factory()->create()->id]
             )
         )->create()
-            ->each(function ($product) use ($categories) {
+            ->each(function ($product) use ($categories, $mainUser) {
+
+                Order::factory()->count(3)->state(
+                    new Sequence(
+                        [
+                            "customer_id" => $mainUser->id
+                        ],
+                        ["customer_id" => User::factory()->create()->id]
+                    )
+                )->create()->each(function ($order) use ($product) {
+                    OrderItems::factory()->count(3)->create([
+                        "order_id" => $order->id,
+                        "product_id" => $product->id,
+                    ]);
+                });
 
                 Stock::factory()->count(3)->create([
                     "product_id" => $product->id

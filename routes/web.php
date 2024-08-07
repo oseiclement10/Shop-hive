@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ShopController;
@@ -58,8 +59,7 @@ Route::prefix("vendor")->name("vendor.")->group(function () {
     Route::middleware("vendor-auth")->group(function () {
         Route::view("dashboard", "vendor.dashboard")->name("dashboard");
         Route::resource("products", ProductController::class)->names(["index"=>"products"]);
-        // Route::view("products", "vendor.products")->name("products");
-        Route::view("orders", "vendor.orders")->name("orders");
+        Route::get("orders", [OrderController::class,"vendorOrders"])->name("orders");
         Route::view("customers", "vendor.customers")->name("customers");
         Route::view("reports", "vendor.reports")->name("reports");
         Route::post("logout", [SessionController::class, "vendorLogout"])->name("logout");
