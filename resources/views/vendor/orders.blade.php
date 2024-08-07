@@ -1,5 +1,6 @@
 <x-layouts.v>
     <h2 class="text-2xl font-semibold mb-4 text-emerald-900 ">Orders {{$orderItems->count()}}</h2>
+    
     <section class="border w-5/6  py-1 rounded-md">
         <table class="w-full">
             <thead class="text-slate-600 text-base font-semibold">
@@ -15,6 +16,7 @@
 
             <tbody class="text-slate-700 text-base ">
                 @foreach ($orderItems as $orderItem)
+                
                     <tr class="border-y @if ($loop->last) border-none @endif">
                         <td class="py-2 pl-4 ">{{ $orderItem->id }}</td>
                         <td class="py-2 pl-4 ">{{ $orderItem->product->name }}</td>

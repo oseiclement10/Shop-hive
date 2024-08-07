@@ -9,7 +9,7 @@ class OrderController extends Controller
 {
     public function vendorOrders()
     {
-        $orderItems = OrderItems::query()->whereIn("product_id", Auth::guard("vendor")->user()->products()->pluck("id"));
-        return view('vendor.orders', ["orderItems" => $orderItems]);
+        $orderItems = OrderItems::query()->whereIn("product_id", Auth::guard("vendor")->user()->products()->pluck("id"))->get();
+        return view('vendor.orders', compact("orderItems"));
     }
 }
