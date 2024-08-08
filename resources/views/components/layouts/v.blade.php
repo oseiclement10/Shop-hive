@@ -1,10 +1,10 @@
 <x-layouts.index>
-    <section class="grid font-dmsans grid-cols-6 min-h-dvh bg-emerald-100 gap-2 ">
-        <aside class="col-span-1">
+    <section class="grid relative font-dmsans grid-cols-6 min-h-dvh bg-emerald-100 gap-2 ">
+        <aside class="col-span-1 h-dvh overflow-y-auto ">
             <x-layouts.v-sidebar />
         </aside>
-        <section class="col-span-5 h-full ">
-            <div class="py-3 pr-8 flex justify-between items-center mb-2">
+        <section class="col-span-5 ">
+            <div class="py-3  pr-8 flex justify-between items-center mb-2">
                 <input type="search" placeholder="search anything ..." class="py-2 bg-white rounded-xl px-6    min-w-[350px]" />
 
                 <div class="flex items-center space-x-3">
@@ -17,7 +17,7 @@
                     <span class="bg-emerald-600 text-white rounded-full flex items-center justify-center h-7 w-7 text-center p-1">AV</span>
                 </div>
             </div>
-            <section class="h-full bg-white px-10 py-6 rounded-tr-xl rounded-tl-xl">
+            <section class="h-dvh bg-white overflow-y-auto px-10 py-6 rounded-tr-xl rounded-tl-xl">
                 {{ $slot }}
             </section>
         </section>
