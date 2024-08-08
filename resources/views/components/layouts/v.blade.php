@@ -17,7 +17,7 @@
                     <span class="bg-emerald-600 text-white rounded-full flex items-center justify-center h-7 w-7 text-center p-1">AV</span>
                 </div>
             </div>
-            <section class="h-dvh bg-white overflow-y-auto px-10 py-6 rounded-tr-xl rounded-tl-xl">
+            <section class="h-dvh bg-white overflow-y-auto px-10 py-6 rounded-tr-xl mr-4 rounded-tl-xl">
                 {{ $slot }}
             </section>
         </section>
