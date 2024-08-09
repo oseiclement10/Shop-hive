@@ -1,66 +1,25 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ isset($title) ? $title.' - '.config('app.name') : config('app.name') }}</title>
+<x-layouts.index>
+    <section class="grid relative font-dmsans grid-cols-6 min-h-dvh bg-emerald-100 gap-2 ">
+        <aside class="col-span-1 h-dvh overflow-y-auto ">
+            <x-layouts.v-sidebar />
+        </aside>
+        <section class="col-span-5 ">
+            <div class="py-3  pr-8 flex justify-between items-center mb-2">
+                <input type="search" placeholder="search anything ..." class="py-2 bg-white rounded-xl px-6    min-w-[350px]" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
-
-    {{-- NAVBAR mobile only --}}
-    <x-nav sticky class="lg:hidden">
-        <x-slot:brand>
-            <x-app-brand />
-        </x-slot:brand>
-        <x-slot:actions>
-            <label for="main-drawer" class="lg:hidden me-3">
-                <x-icon name="o-bars-3" class="cursor-pointer" />
-            </label>
-        </x-slot:actions>
-    </x-nav>
-
-    {{-- MAIN --}}
-    <x-main full-width>
-        {{-- SIDEBAR --}}
-        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
-
-            {{-- BRAND --}}
-            <x-app-brand class="p-5 pt-3" />
-
-            {{-- MENU --}}
-            <x-menu activate-by-route>
-
-                {{-- User --}}
-                @if($user = auth()->user())
-                    <x-menu-separator />
-
-                    <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="-mx-2 !-my-2 rounded">
-                        <x-slot:actions>
-                            <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
-                        </x-slot:actions>
-                    </x-list-item>
-
-                    <x-menu-separator />
-                @endif
-
-                <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
-            </x-menu>
-        </x-slot:sidebar>
-
-        {{-- The `$slot` goes here --}}
-        <x-slot:content>
-            {{ $slot }}
-        </x-slot:content>
-    </x-main>
-
-    {{--  TOAST area --}}
-    <x-toast />
-</body>
-</html>
+                <div class="flex items-center space-x-3">
+                    <svg class="w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z" />
+                    </svg>
+                    <span class="bg-emerald-600 text-white rounded-full flex items-center justify-center h-7 w-7 text-center p-1">AV</span>
+                </div>
+            </div>
+            <section class="h-dvh bg-white overflow-y-auto px-10 py-6 rounded-tr-xl mr-4 rounded-tl-xl">
+                {{ $slot }}
+            </section>
+        </section>
+    </section>
+</x-layouts.index>

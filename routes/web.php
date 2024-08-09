@@ -5,12 +5,17 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ShopController;
 use App\Http\Requests\VendorEmailVerificationRequest;
+use App\Livewire\VendorCustomers;
+use App\Livewire\VendorReports;
+use App\Livewire\VendorDashboard;
+use App\Livewire\VendorOrders;
+use App\Livewire\VendorProducts;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
-use App\Livewire\Welcome;
 
+use App\Livewire\Welcome;
 
 
 Route::get('/mary-checkup', Welcome::class);
@@ -61,11 +66,12 @@ Route::prefix("vendor")->name("vendor.")->group(function () {
     Route::post("login", [SessionController::class, "vendorLogin"])->name("login");
 
     Route::middleware("vendor-auth")->group(function () {
-        Route::view("dashboard", "vendor.dashboard")->name("dashboard");
-        Route::resource("products", ProductController::class)->names(["index"=>"products"]);
-        Route::get("orders", [OrderController::class,"vendorOrders"])->name("orders");
-        Route::view("customers", "vendor.customers")->name("customers");
-        Route::view("reports", "vendor.reports")->name("reports");
+        Route::get("dashboard", VendorDashboard::class)->name("dashboard");
+        Route::get("products", VendorProducts::class)->name("products");
+        // Route::resource("products", ProductController::class)->names(["index"=>"products"]);
+        Route::get("orders", VendorOrders::class)->name("orders");
+        Route::get("customers", VendorCustomers::class)->name("customers");
+        Route::get("reports", VendorReports::class)->name("reports");
         Route::post("logout", [SessionController::class, "vendorLogout"])->name("logout");
     });
 });
