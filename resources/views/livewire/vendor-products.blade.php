@@ -1,5 +1,21 @@
 <section>
-    <h2 class="mb-4 text-2xl font-semibold text-emerald-900">Products</h2>
+    <x-layouts.v-page-caption title="Products" desc="view and manage products and stocks" />
+    
+    {{-- STATISTICS --}}
+
+    <div class="grid grid-cols-3 gap-6 mb-8    w-[95%]">
+        <x-stat title="Total Products" description="Number of products you own" value="44" icon="c-cube"
+            class="border text-emerald-600 border-emerald-300 hover:border-emerald-600 transition-simple "
+            color="text-emerald-500"  />
+    </div>
+    
+    {{-- TABLE --}}
+
+    <div class="w-[95%] py-1 border rounded-md">
+        <x-table :headers="$headers" :rows="$products" />
+    </div>
+    
+    {{-- <h2 class="mb-4 text-2xl font-semibold text-emerald-900">Products</h2>
     <section class="w-5/6 py-1 border rounded-md">
         <table class="w-full">
             <thead class="text-base font-semibold text-slate-600">
@@ -29,6 +45,6 @@
             </tbody>
 
         </table>
-    </section>
+    </section> --}}
 
 </section>

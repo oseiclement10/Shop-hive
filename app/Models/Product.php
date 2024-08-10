@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Product extends Model
 {
     use HasFactory;
+
+    public function scopeVendorProducts($query)
+    {
+        $vendor = Auth::guard("vendor")->user();
+        return $query->where("vendor_id", $vendor->id);
+    }
 
     public function vendor()
     {

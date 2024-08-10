@@ -68,7 +68,6 @@ Route::prefix("vendor")->name("vendor.")->group(function () {
     Route::middleware("vendor-auth")->group(function () {
         Route::get("dashboard", VendorDashboard::class)->name("dashboard");
         Route::get("products", VendorProducts::class)->name("products");
-        // Route::resource("products", ProductController::class)->names(["index"=>"products"]);
         Route::get("orders", VendorOrders::class)->name("orders");
         Route::get("customers", VendorCustomers::class)->name("customers");
         Route::get("reports", VendorReports::class)->name("reports");
