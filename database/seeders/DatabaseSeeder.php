@@ -7,6 +7,7 @@ use App\Models\OrderItems;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\Stock;
+use App\Models\StockMovement;
 use App\Models\User;
 use App\Models\Order;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -61,9 +62,16 @@ class DatabaseSeeder extends Seeder
                     ]);
                 });
 
-                Stock::factory()->count(3)->create([
+                $stock = Stock::factory()->create([
                     "product_id" => $product->id
                 ]);
+
+                StockMovement::factory()->count(2)->create([
+                    "stock_id" => $stock->id
+                ]);
+
+            
+
                 ProductReview::factory()->count(3)->create([
                     "product_id" => $product->id,
                 ]);

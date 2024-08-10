@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Product;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Auth;
 use Livewire\WithPagination;
 
 #[Title("Products")]
@@ -20,9 +19,9 @@ class VendorProducts extends Component
     {
         $this->headers = [
             ["key" => "name", "label" => "Name"],
-            ["key" => "category", "label" => "Category"],
-            ["key" => "quantity", "label" => "Quantity"],
-            ["key" => "price", "label" => "Price"],
+            ["key" => "category", "label" => "Category(s)"],
+            ["key" => "stock.quantity", "label" => "Quantity"],
+            ["key" => "stock.price", "label" => "Price"],
             ["key" => "rating", "label" => "User Ratings"],
         ];
     }
@@ -32,7 +31,7 @@ class VendorProducts extends Component
     {
         return view('livewire.vendor-products', [
             'products' => Product::vendorProducts()
-                ->with(["stocks", "categories", "reviews"])
+                ->with(["stock", "categories", "reviews"])
                 ->latest()->paginate(20),
         ]);
     }
