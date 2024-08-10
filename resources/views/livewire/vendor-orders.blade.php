@@ -1,34 +1,28 @@
 <section>
-    <h2 class="mb-4 text-2xl font-semibold text-emerald-900 ">Orders {{ $orderItems->count() }}</h2>
+    <x-layouts.v-page-caption title="Orders" desc="view and manage orders" />
+    <div class="w-[95%] py-1 border rounded-md">
+        <x-table striped :headers="$headers" :rows="$orderItems" :cell-decoration="$cell_decoration" @row-click="console.log($event.detail.id)"
+            with-pagination>
+            @scope('cell_price', $orderItem)
+                <span class=" text-slate-800"> Gh₵ {{ $orderItem->price }} </span>
+            @endscope
 
-    <div class="w-5/6 py-1 border rounded-md">
-        <table class="w-full">
-            <thead class="text-base font-semibold text-slate-600">
-                <tr class="">
-                    <td class="py-2 pl-4">ID</td>
-                    <td class="py-2 pl-4">Product</td>
-                    <td class="py-2 pl-4">Price</td>
-                    <td class="py-2 pl-4">Quantity </td>
-                    <td class="py-2 pl-4">Total</td>
-                    <td class="py-2 pl-4">Status</td>
-                </tr>
-            </thead>
+            @scope('cell_total', $orderItem)
+                <span class=" text-slate-800"> Gh₵ {{ $orderItem->total }} </span>
+            @endscope
 
-            <tbody class="text-base text-slate-700 ">
-                @foreach ($orderItems as $orderItem)
-                    <tr class="border-y @if ($loop->last) border-none @endif">
-                        <td class="py-2 pl-4 ">{{ $orderItem->id }}</td>
-                        <td class="py-2 pl-4 ">{{ $orderItem->product->name }}</td>
-                        <td class="py-2 pl-4 "> Gh₵ {{ $orderItem->price }} </td>
-                        <td class="py-2 pl-4 "> {{ $orderItem->quantity }}</td>
-                        <td class="py-2 pl-4 ">
-                            Gh₵ {{ $orderItem->total }}
-                        </td>
-                        <td class="py-2 pl-4 ">{{ $orderItem->status }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-
-        </table>
+            @scope('actions', $orderItem)
+                <x-dropdown >
+                    <x-slot:trigger>
+                        <button class="pr-2" > 
+                            <x-icon name="ri.more-fill" />
+                        </button>
+                    </x-slot:trigger>
+                    <x-menu-item title="Change Status" icon="s-arrow-path" />
+                    <x-menu-item title="Delete" icon="o-trash" />
+             
+                </x-dropdown>
+            @endscope
+        </x-table>
     </div>
 </section>
