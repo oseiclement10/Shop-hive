@@ -15,7 +15,7 @@
     
     {{-- TABLE --}}
 
-    <div class="w-[95%] py-1 border border-emerald-400 rounded-md">
+    <div class="w-[95%] pt-1 pb-4 border border-emerald-400 rounded-md">
         <x-table striped :headers="$headers" :rows="$orderItems" :cell-decoration="$cell_decoration"
             @row-click="console.log($event.detail.id)" with-pagination>
             @scope('cell_price', $orderItem)

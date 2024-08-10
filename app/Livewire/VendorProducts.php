@@ -15,6 +15,10 @@ class VendorProducts extends Component
 
     public $headers;
 
+    public bool $isModalOpen = false;
+
+   
+
     public function mount()
     {
         $this->headers = [

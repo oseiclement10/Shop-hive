@@ -18,7 +18,7 @@
 </head>
 
 <body class="relative">
-    <section class="relative grid grid-cols-6 gap-2 font-dmsans min-h-dvh bg-emerald-100 ">
+    <section class="relative grid grid-cols-6 font-dmsans min-h-dvh bg-emerald-100 ">
         <aside class="col-span-1 overflow-y-auto h-dvh ">
             <x-layouts.v-sidebar />
         </aside>
