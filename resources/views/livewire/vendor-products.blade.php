@@ -17,7 +17,7 @@
         </button>
 
     </div>
-
+    {{ $formMode }}
     {{-- TABLE --}}
     <div class="w-[95%] py-1 border border-emerald-400 rounded-md hover:border-emerald-600">
         <x-table :headers="$headers" :rows="$products" with-pagination>
@@ -41,13 +41,34 @@
             @scope('cell_rating', $product)
                 <span> {{ round($product->reviewsAverage(), 1) }} </span>
             @endscope
+
+            @scope('actions', $product)
+                <span class="flex space-x-1">
+                    <x-dropdown>
+                        <x-slot:trigger>
+                            <button class="pr-2 text-gray-500 hover:text-emerald-600">
+                                 <x-icon name="s-pencil-square" class="w-4 h-4 " />
+                            </button>
+                        </x-slot:trigger>
+                        <x-menu-item title="Update Stock" icon="s-arrow-path" wire:click="setFormMode('updateStock')"  />
+                        <x-menu-item title="Edit Product" icon="o-trash" wire:click="setFormMode('editProduct')" />
+                    </x-dropdown>   
+                    <button icon='o-trash' title="Delete"  class="text-gray-500 hover:text-red-600"  >
+                        <x-icon name="o-trash" class="w-4 h-4 " />    
+                    </button> 
+                   
+                </span>
+                
+            @endscope
         </x-table>
     </div>
+
+
 
     {{-- FORM --}}
 
     <x-modal wire:model="isModalOpen" title="Add New Product" subtitle="Fill form to create new product">
-        <livewire:product-form />
+        <livewire:product-form  />
     </x-modal>
 
 </section>

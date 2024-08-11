@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule;
@@ -12,6 +13,9 @@ use Auth;
 class ProductForm extends Component
 {
     use WithFileUploads;
+
+    // #[Reactive]
+    // public $mode = "create";
 
     #[Rule("required", message: "name is required")]
     public $name;
@@ -33,6 +37,8 @@ class ProductForm extends Component
 
     #[Rule("required", message: "quantity is required")]
     public $quantity;
+
+   
 
     public function save()
     {
@@ -56,8 +62,7 @@ class ProductForm extends Component
 
         $product->categories()->attach($this->category);
         $this->reset();
-
-        $this->;
+        $this->dispatch("productSaved");
     }
 
 

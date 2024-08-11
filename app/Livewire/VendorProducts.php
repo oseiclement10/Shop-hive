@@ -20,7 +20,15 @@ class VendorProducts extends Component
 
     public bool $isModalOpen = false;
 
+    public string $formMode = "create" ;
+
     protected $listeners = ['productSaved' => 'updateProductList'];
+
+    public function setFormMode($mode)
+    {
+        $this->formMode = $mode;
+    }
+
 
     public function mount()
     {
@@ -31,6 +39,7 @@ class VendorProducts extends Component
             ["key" => "stock.price", "label" => "Price"],
             ["key" => "rating", "label" => "User Ratings"],
         ];
+
     }
 
     public function updateProductList()
