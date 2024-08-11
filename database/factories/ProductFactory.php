@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             "name" => fake()->words(3, true),
             "img" => "https://picsum.photos/id/" . fake()->numberBetween(1, 50) . "/400/250",
             "short_description" => fake()->sentence(),
-            "description" => fake()->paragraph(),
+            "long_description" => fake()->paragraph(),
             "slug" => fake()->slug(),
             "vendor_id" => Vendor::factory(),
         ];

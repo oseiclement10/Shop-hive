@@ -5,15 +5,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Product extends Model
 {
     use HasFactory;
+    use HasSlug;
+
+    protected $fillable = [
+        "name",
+        "img",
+        "vendor_id",
+        "short_description",
+        "long_description"
+    ];
 
     public function scopeVendorProducts($query)
     {
         $vendor = Auth::guard("vendor")->user();
         return $query->where("vendor_id", $vendor->id);
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 
     public function vendor()
@@ -26,7 +44,7 @@ class Product extends Model
         return $this->hasOne(Stock::class);
     }
 
-    
+
 
     public function totalQuantity()
     {
