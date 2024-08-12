@@ -2,16 +2,16 @@
     <x-layouts.v-page-caption title="Products" desc="view and manage products and stocks" />
 
     {{-- STATISTICS --}}
-    <div class="grid grid-cols-3 gap-6 mb-2    w-[95%]">
+    {{-- <div class="grid grid-cols-3 gap-6 mb-2    w-[95%]">
         <x-stat title="Total Products" description="Number of products you own" value="{{ $products->count() }}"
             icon="c-cube" class="border text-emerald-600 border-emerald-400 hover:border-emerald-600 transition-simple "
             color="text-emerald-500" />
-    </div>
+    </div> --}}
 
 
     <div class="w-[95%] flex items-end justify-end mb-6">
 
-        <button @click="$wire.showAdd()"
+        <button wire:click="showAdd()"
             class="px-4 py-2 text-sm text-white rounded-md bg-emerald-500 hover:bg-emerald-600 active:bg-white">
             Add Product <x-icon name="eos.add" />
         </button>
@@ -80,9 +80,9 @@
             <x-textarea label="Long Description" name="desc" wire:model="form.long_description"
                 placeholder="Product Description ..." rows="5" class="border-emerald-500" />
 
-            <x-choices-offline label="Category" name="category" wire:model="form.category" :options="$categories"
+            {{-- <x-choices-offline label="Category" name="category" wire:model="form.category" :options="$categories"
                 hint="select at least one category" class="border-emerald-500" no-result-text="Ops! Nothing here ..."
-                searchable />
+                searchable /> --}}
 
 
             <div class="border-t">
@@ -95,7 +95,7 @@
             </div>
 
             <x-slot:actions>
-                <x-button label="Cancel" class="" wire:click="$wire.isModalOpen=false" />
+                <x-button label="Cancel" class="" wire:click="isModalOpen=false" />
                 <x-button label="Save Product"
                     class="text-sm text-white border-none rounded-md bg-emerald-500 hover:bg-emerald-600 active:bg-white"
                     type="submit" spinner="save" />
