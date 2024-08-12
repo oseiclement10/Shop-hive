@@ -18,10 +18,6 @@ class VendorProducts extends Component
 {
     use WithPagination;
 
-    public $categories;
-    public $products;
-
-    public $headers;
 
     public ProductForm $form;
 
@@ -58,22 +54,22 @@ class VendorProducts extends Component
         }
     }
 
-    public function mount()
+    
+    public function render()
     {
-        $this->categories = Category::get()->push((object) ['id' => "0", "name" => "Other"]);
-        $this->products = Product::vendorProducts()->with(["stock", "categories", "reviews"])->latest()->paginate(20);
-        $this->headers = [
+        $headers = [
             ["key" => "name", "label" => "Name"],
             ["key" => "category", "label" => "Category(s)"],
             ["key" => "stock.quantity", "label" => "Quantity"],
             ["key" => "stock.price", "label" => "Price"],
             ["key" => "rating", "label" => "User Ratings"],
         ];
-    }
-
-
-    public function render()
-    {
-        return view('livewire.vendor-products');
+        return view('livewire.vendor-products', [
+            'categories' => Category::get()->push((object) ['id' => "0", "name" => "Other"]),
+            'headers' => $headers,
+            'products' => Product::vendorProducts()
+                ->with(["stock", "categories", "reviews"])
+                ->latest()->paginate(20),
+        ]);
     }
 }
