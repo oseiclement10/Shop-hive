@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Reactive;
-use Livewire\Component;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule;
 use App\Models\Category;
 use App\Models\Product;
 use Auth;
 
-class ProductForm extends Component
+
+class ProductForm extends Form
 {
     use WithFileUploads;
-
-    // #[Reactive]
-    // public $mode = "create";
+            
+    public ?Product $product;
 
     #[Rule("required", message: "name is required")]
     public $name;
@@ -38,9 +38,7 @@ class ProductForm extends Component
     #[Rule("required", message: "quantity is required")]
     public $quantity;
 
-   
-
-    public function save()
+    public function store()
     {
         $this->validate();
 
@@ -62,14 +60,38 @@ class ProductForm extends Component
 
         $product->categories()->attach($this->category);
         $this->reset();
-        $this->dispatch("productSaved");
     }
 
-
-    public function render()
+    public function setProduct(Product $product)
     {
-        return view('livewire.product-form', [
-            'categories' => Category::get()->push((object) ['id' => "0", "name" => "Other"]),
-        ]);
+        $this->product = $product;
+        $this->name = $product->name;
+        $this->category = $product->categories->pluck('id')->toArray();
+        $this->short_description = $product->short_description;
+        $this->long_description = $product->long_description;
+        $this->img = $product->img;
+        $this->price = $product->stock->price;
+        $this->quantity = $product->stock->quantity;
     }
+
+    public function update()
+    {
+        $this->validate();
+        $this->product->update([
+            "name" => $this->name,
+            "short_description" => $this->short_description,
+            "long_description" => $this->long_description,
+            "img" => $this->img,
+        ]);
+        $this->product->stock()->updateOrCreate(
+            ["product_id" => $this->product->id],
+            [
+                "price" => $this->price,
+                "quantity" => $this->quantity,
+            ]
+        );
+        $this->product->categories()->sync($this->category);
+        $this->reset();
+    }
+
 }
