@@ -2,11 +2,11 @@
     <x-layouts.v-page-caption title="Products" desc="view and manage products and stocks" />
 
     {{-- STATISTICS --}}
-    {{-- <div class="grid grid-cols-3 gap-6 mb-2    w-[95%]">
+    <div class="grid grid-cols-3 gap-6 mb-2    w-[95%]">
         <x-stat title="Total Products" description="Number of products you own" value="{{ $products->count() }}"
             icon="c-cube" class="border text-emerald-600 border-emerald-400 hover:border-emerald-600 transition-simple "
             color="text-emerald-500" />
-    </div> --}}
+    </div>
 
 
     <div class="w-[95%] flex items-end justify-end mb-6">
@@ -50,7 +50,7 @@
                             </button>
                         </x-slot:trigger>
                         <x-menu-item title="Update Stock" icon="s-arrow-path" />
-                        <x-menu-item title="Edit Product" icon="o-trash" @click="$wire.isModalOpen=true"
+                        <x-menu-item title="Edit Product" icon="o-pencil" @click="$wire.isEditMode=true; $wire.isModalOpen=true;"
                             wire:click="showEdit({{ $product->id }})" />
                     </x-dropdown>
                     <button icon='o-trash' title="Delete" @click='$wire.deleteModalOpen=true;$wire.productId={{ $product->id }}'
