@@ -53,7 +53,8 @@
                         <x-menu-item title="Edit Product" icon="o-trash" @click="$wire.isModalOpen=true"
                             wire:click="showEdit({{ $product->id }})" />
                     </x-dropdown>
-                    <button icon='o-trash' title="Delete" class="text-gray-500 hover:text-red-600">
+                    <button icon='o-trash' title="Delete" @click='$wire.deleteModalOpen=true;$wire.productId={{ $product->id }}'
+                        class="text-gray-500 hover:text-red-600">
                         <x-icon name="o-trash" class="w-4 h-4 " />
                     </button>
 
@@ -106,6 +107,17 @@
 
         </x-form>
 
+    </x-modal>
+
+
+    <x-modal wire:model="deleteModalOpen" title="Delete Product" >
+        <h3>Are you sure you want to delete product ?</h3>
+        <x-slot:actions>
+            <x-button label="Cancel" class="" @click="$wire.deleteModalOpen=false" />
+            <x-button type="button" label="Yes Delete!"
+                class="text-sm text-white bg-red-500 border-none rounded-md hover:bg-red-600 active:bg-white"
+                type="submit" spinner="delete" @click="$wire.delete()" />
+        </x-slot:actions>
     </x-modal>
 
 </section>

@@ -25,6 +25,22 @@ class VendorProducts extends Component
 
     public bool $isEditMode = false;
 
+    public bool $deleteModalOpen = false;
+    public string $productId = "";
+
+
+    public function showDelete($id)
+    {
+        $this->productId = $id;
+        $this->deleteModalOpen = true;
+    }
+
+
+    public function delete()
+    {
+        Product::find($this->productId)->delete();
+        $this->deleteModalOpen = false;
+    }
 
     public function showAdd()
     {
@@ -53,7 +69,7 @@ class VendorProducts extends Component
         }
     }
 
-    
+
     public function render()
     {
         $headers = [
