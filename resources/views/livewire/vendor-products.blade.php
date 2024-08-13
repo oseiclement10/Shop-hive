@@ -11,7 +11,7 @@
 
     <div class="w-[95%] flex items-end justify-end mb-6">
 
-        <button wire:click="showAdd()"
+        <button @click="$wire.isModalOpen=true" wire:click='showAdd'
             class="px-4 py-2 text-sm text-white rounded-md bg-emerald-500 hover:bg-emerald-600 active:bg-white">
             Add Product <x-icon name="eos.add" />
         </button>
@@ -50,7 +50,8 @@
                             </button>
                         </x-slot:trigger>
                         <x-menu-item title="Update Stock" icon="s-arrow-path" />
-                        <x-menu-item title="Edit Product" icon="o-trash" @click="$wire.showEdit({{ $product->id }})" />
+                        <x-menu-item title="Edit Product" icon="o-trash" @click="$wire.isModalOpen=true"
+                            wire:click="showEdit({{ $product->id }})" />
                     </x-dropdown>
                     <button icon='o-trash' title="Delete" class="text-gray-500 hover:text-red-600">
                         <x-icon name="o-trash" class="w-4 h-4 " />
@@ -67,6 +68,7 @@
 
     <x-modal wire:model="isModalOpen" title="{{ $isEditMode ? 'Edit Product' : 'Add New Product' }}"
         subtitle="Fill form to {{ $isEditMode ? 'update' : 'add new' }} product">
+
         <x-form class="space-y-4" wire:submit='save'>
             <x-input label="Product Name" name="name" wire:model="form.name" class="border-emerald-500"
                 placeholder="name goes here" />
@@ -75,14 +77,14 @@
                     class="h-24 rounded-lg" />
             </x-file>
 
-            <x-input label="Short Description" name="desc" wire:model="form.short_description" class="border-emerald-500"
-                placeholder="description goes here" />
+            <x-input label="Short Description" name="desc" wire:model="form.short_description"
+                class="border-emerald-500" placeholder="description goes here" />
             <x-textarea label="Long Description" name="desc" wire:model="form.long_description"
                 placeholder="Product Description ..." rows="5" class="border-emerald-500" />
 
-            {{-- <x-choices-offline label="Category" name="category" wire:model="form.category" :options="$categories"
+            <x-choices-offline label="Category" name="category" wire:model="form.category" :options="$categories"
                 hint="select at least one category" class="border-emerald-500" no-result-text="Ops! Nothing here ..."
-                searchable /> --}}
+                searchable />
 
 
             <div class="border-t">
@@ -103,6 +105,7 @@
 
 
         </x-form>
+
     </x-modal>
 
 </section>

@@ -29,7 +29,6 @@ class VendorProducts extends Component
     public function showAdd()
     {
         $this->form->reset();
-        $this->reset();
         $this->isEditMode = false;
         $this->isModalOpen = true;
     }
