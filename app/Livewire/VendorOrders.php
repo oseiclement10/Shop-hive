@@ -52,6 +52,10 @@ class VendorOrders extends Component
                 ->where('status', 'completed')
                 ->whereDate('order_items.updated_at', Carbon::today())
                 ->count(),
+            "todayOrderSales" => Auth::guard('vendor')->user()->orderItems()
+                ->where('status', 'completed')
+                ->whereDate('order_items.updated_at', Carbon::today())
+                ->sum("price"),
         ]);
     }
 }
