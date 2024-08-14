@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
+use App\Models\Vendor;
+use Illuminate\Support\Carbon;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use App\Models\OrderItems;
@@ -12,11 +15,11 @@ use Livewire\WithPagination;
 
 class VendorOrders extends Component
 {
-   
+
     use WithPagination;
     public $headers;
 
- 
+
     public function mount()
     {
         $this->headers = [
@@ -29,22 +32,26 @@ class VendorOrders extends Component
         ];
     }
 
-    public function orderItems()
-    {
-        return OrderItems::query()->with("product")->whereIn("product_id", Auth::guard("vendor")->user()->products()->pluck("id"))->paginate(20);
-    }
+
 
     public function render()
     {
-        return view('livewire.vendor-orders', [
-            "cell_decoration" => [
-                'status' => [
-                    'text-emerald-600' => fn($orderItem) => $orderItem->status == "completed",
-                    'text-blue-600' => fn($orderItem) => $orderItem->status == "processing",
-                    'text-red-500' => fn($orderItem) => $orderItem->status == "cancelled",
-                ],
+        $orderItems = Auth::guard('vendor')->user()->orderItems()->latest()->paginate(20);
+        $cell_decoration = [
+            'status' => [
+                'text-emerald-600' => fn($orderItem) => $orderItem->status == "completed",
+                'text-blue-600' => fn($orderItem) => $orderItem->status == "processing",
+                'text-red-500' => fn($orderItem) => $orderItem->status == "cancelled",
             ],
-            "orderItems" => $this->orderItems(),
+        ];
+        return view('livewire.vendor-orders', [
+            "cell_decoration" => $cell_decoration,
+            "orderItems" => $orderItems,
+            "pendingOrders"=> Auth::guard('vendor')->user()->orderItems()->where('status', 'pending')->count(),
+            "todayOrders" => Auth::guard('vendor')->user()->orderItems()
+                ->where('status', 'completed')
+                ->whereDate('order_items.updated_at', Carbon::today())
+                ->count(),
         ]);
     }
 }

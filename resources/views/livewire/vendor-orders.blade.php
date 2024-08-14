@@ -4,11 +4,11 @@
     {{-- STATISTICS --}}
 
     <div class="grid grid-cols-3 gap-6 mb-8    w-[95%]">
-        <x-stat title="Sales Today" description="Orders completed (357)" value="Gh₵ 6124.23" icon="o-arrow-trending-up"
+        <x-stat title="Sales Today" description="Orders completed ({{ $todayOrders }})" :value="$todayOrders" icon="o-arrow-trending-up"
             class="border text-emerald-600 border-emerald-300 hover:border-emerald-600 transition-simple "
             color="text-emerald-500" tooltip-right="Sales today" />
       
-        <x-stat title="Pending Orders" description="Orders unprocessed" value="22.124" icon="o-arrow-trending-down"
+        <x-stat title="Pending Orders" description="Orders unprocessed" :value="$pendingOrders" icon="o-arrow-trending-down"
             class="text-orange-500 border border-orange-300 hover:border-orange-600" color="text-orange-500"
             tooltip-right="Pending Orders" />
     </div>

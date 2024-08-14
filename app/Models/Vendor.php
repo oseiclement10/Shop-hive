@@ -37,7 +37,10 @@ class Vendor extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Product::class);
     }
 
- 
+    public function orderItems()
+    {
+        return $this->hasManyThrough(OrderItems::class,Product::class);
+    }
 
     public function sendEmailVerificationNotification()
     {
