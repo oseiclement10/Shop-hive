@@ -19,6 +19,11 @@ class VendorOrders extends Component
     use WithPagination;
     public $headers;
 
+    public $modalOpen = $true;
+    public $orderItemId;
+
+    public $orderStatus;
+
 
     public function mount()
     {
@@ -30,6 +35,17 @@ class VendorOrders extends Component
             ["key" => "total", "label" => "Total"],
             ["key" => "status", "label" => "Status"],
         ];
+    }
+
+
+    public function updateOrderStatus()
+    {
+        $this->validate();
+        $orderItem = OrderItems::find($this->orderItemId);
+        $orderItem->update([
+            "status" => $this->orderStatus
+        ]);
+        $this->modalOpen = false;
     }
 
 
@@ -47,7 +63,7 @@ class VendorOrders extends Component
         return view('livewire.vendor-orders', [
             "cell_decoration" => $cell_decoration,
             "orderItems" => $orderItems,
-            "pendingOrders"=> Auth::guard('vendor')->user()->orderItems()->where('status', 'pending')->count(),
+            "pendingOrders" => Auth::guard('vendor')->user()->orderItems()->where('status', 'pending')->count(),
             "todayOrders" => Auth::guard('vendor')->user()->orderItems()
                 ->where('status', 'completed')
                 ->whereDate('order_items.updated_at', Carbon::today())
